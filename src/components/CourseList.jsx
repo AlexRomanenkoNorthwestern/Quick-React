@@ -12,12 +12,18 @@ const Course = ({course}) => (
     </div>
 );
 
-const CourseList = ({courses}) => (
+const CourseList = ({courses, selection}) => {
+  return( 
   <div className="course-list">
     { 
-    Object.entries(courses).map(([id, course]) => <Course course={course} />) 
+    Object.entries(courses).map(([id, course]) => {
+      if (selection == course.term) 
+      return( <Course course={course} /> )
+      }
+    )   
     }
   </div>
-);
+  )
+};
 
 export default CourseList;
