@@ -1,8 +1,8 @@
 import './CourseList.css';
 
-const Course = ({course}) => (
-    <div className ="card m-1 p-2">
-      <div className="card-body">
+const Course = ({course, selectedCourses, toggleSelected}) => (
+    <div className ="card m-1 p-2" onClick={() => toggleSelected(course)}>
+      <div className={`card-body ${selectedCourses.includes(course) ? 'selected' : ''}`}>
         <h4>{course.term}{' CS '}{course.number}<br/></h4>
         {course.title}
       </div>
@@ -12,13 +12,16 @@ const Course = ({course}) => (
     </div>
 );
 
-const CourseList = ({courses, selection}) => {
+const CourseList = ({courses, selection, selectedCourses, toggleSelected}) => {
   return( 
   <div className="course-list">
     { 
     Object.entries(courses).map(([id, course]) => {
       if (selection == course.term) 
-      return( <Course course={course} /> )
+      return( <Course course = {course} 
+                      selectedCourses = {selectedCourses} 
+                      toggleSelected = {toggleSelected}
+             />)
       }
     )   
     }

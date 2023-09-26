@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import CourseList from './CourseList';
 
-const terms = {
-  Fall: 'Fall items...',
-  Winter: 'Winter items...',
-  Spring: 'Spring items...'
-};
+const terms = ['Fall', 'Winter', 'Spring'];
 
 const TermButton = ({term, selection, setSelection}) => (
   <div>
@@ -18,21 +14,35 @@ const TermButton = ({term, selection, setSelection}) => (
 );
 
 const TermSelector = ({selection, setSelection}) => (
-  <div className="btn-group">
+  <div class="text-center">
+    <div className="btn-group">
     { 
-      Object.keys(terms).map(term => <TermButton key={term} term={term} selection={selection} setSelection={setSelection} />)
+      terms.map(term => <TermButton key={term} term={term} selection={selection} setSelection={setSelection} />)
     }
+    </div>
   </div>
 );
 
 const TermPage = ({courses}) => {
-  const [selection, setSelection] = useState(() => Object.keys(terms)[0]);
+  const [buttonSelection, setSelection] = useState(() => terms[0]);
+  const [selectedCourses, setSelectedCourses] = useState([]);
+
+  const toggleSelected = (item) => setSelectedCourses(
+    selectedCourses.includes(item)
+    ? selectedCourses.filter(x => x !== item)
+    : [...selectedCourses, item]
+  );
+
   return (
     <div>
-      <TermSelector selection={selection} setSelection={setSelection} />
-      <CourseList selection={selection} courses={courses}/>
+      <TermSelector selection={buttonSelection} setSelection={setSelection} />
+      <CourseList selection={buttonSelection} 
+                  courses={courses} 
+                  selectedCourses={selectedCourses}
+                  toggleSelected={toggleSelected}
+      />
     </div>
   );
-}
+}  
 
 export default TermPage;

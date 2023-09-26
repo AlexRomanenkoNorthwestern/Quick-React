@@ -17,7 +17,9 @@ const Main = () => {
   <div className="container">
       <Banner title = {data.title}/>
       <TermPage courses = {data.courses}/>
+      <br></br>
   </div>
+
   )
 };
 
