@@ -5,7 +5,6 @@
 
 .selected {
     background-color:lightgray;
-    color: green;
 }
 .notselected {
     background-color:white;

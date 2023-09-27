@@ -1,7 +1,4 @@
-import { useState } from 'react';
-import CourseList from './CourseList';
-
-const terms = ['Fall', 'Winter', 'Spring'];
+import Terms from './TermConstants';
 
 const TermButton = ({term, selection, setSelection}) => (
   <div>
@@ -17,32 +14,10 @@ const TermSelector = ({selection, setSelection}) => (
   <div class="text-center">
     <div className="btn-group">
     { 
-      terms.map(term => <TermButton key={term} term={term} selection={selection} setSelection={setSelection} />)
+      Terms.map(term => <TermButton key={term} term={term} selection={selection} setSelection={setSelection} />)
     }
     </div>
   </div>
 );
 
-const TermPage = ({courses}) => {
-  const [buttonSelection, setSelection] = useState(() => terms[0]);
-  const [selectedCourses, setSelectedCourses] = useState([]);
-
-  const toggleSelected = (item) => setSelectedCourses(
-    selectedCourses.includes(item)
-    ? selectedCourses.filter(x => x !== item)
-    : [...selectedCourses, item]
-  );
-
-  return (
-    <div>
-      <TermSelector selection={buttonSelection} setSelection={setSelection} />
-      <CourseList selection={buttonSelection} 
-                  courses={courses} 
-                  selectedCourses={selectedCourses}
-                  toggleSelected={toggleSelected}
-      />
-    </div>
-  );
-}  
-
-export default TermPage;
+export default TermSelector;

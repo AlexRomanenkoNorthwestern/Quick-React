@@ -1,6 +1,5 @@
 import Banner from "./components/Banner";
-import TermPage from "./components/TermSelector";
-import CourseList from "./components/CourseList";
+import CoursePage from "./components/CoursePage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -15,11 +14,9 @@ const Main = () => {
 
   return ( 
   <div className="container">
-      <Banner title = {data.title}/>
-      <TermPage courses = {data.courses}/>
-      <br></br>
+     <Banner title = {data.title}/>
+     <CoursePage courses = {data.courses}/>
   </div>
-
   )
 };
 
