@@ -24,13 +24,15 @@ const CoursePage = ({courses}) => {
 
     return (
       <div>
-        <button className="btn btn-outline-dark" 
-          onClick={openModal}>Course Plan
-        </button>
+        <nav className="d-flex">
+          <TermSelector selection={buttonSelection} setSelection={setSelection} />
+          <button className="btn btn-outline-dark" style={{position:'absolute', right:'12.8%'}}
+            onClick={openModal}><i className="bi bi-calendar-check"></i> Course Plan
+          </button>
+        </nav>
         <Modal open={open} close={closeModal}>
           <CoursePlan selected={selectedCourses} />
         </Modal>
-        <TermSelector selection={buttonSelection} setSelection={setSelection} />
         <CourseList selection={buttonSelection} 
                     courses={courses} 
                     selectedCourses={selectedCourses}

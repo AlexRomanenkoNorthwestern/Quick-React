@@ -4,7 +4,7 @@
   }
 
 .selected {
-    background-color:lightgray;
+    background-color: rgb(220, 232, 246);
 }
 .notselected {
     background-color:white;

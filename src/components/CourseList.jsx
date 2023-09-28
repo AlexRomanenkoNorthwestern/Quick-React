@@ -16,12 +16,11 @@ const CourseList = ({courses, selection, selectedCourses, toggleSelected}) => {
   return( 
   <div className="course-list">
     { 
-    Object.entries(courses).filter(([id, course]) => course.term == selection ).map(
-    ([id, course]) =><Course course = {course} selectedCourses = {selectedCourses} 
-    toggleSelected = {toggleSelected}
-/>)
-}
-</div>
+    Object.entries(courses).map(([id, course]) => {
+      if (course.term == selection) return( <Course course = {course} selectedCourses = {selectedCourses} 
+      toggleSelected = {toggleSelected}/>)})
+    }
+  </div>
 )
 };
 

@@ -3,8 +3,8 @@ const CoursePlan = ({selected}) => (
     {
       selected.length === 0
       ? <h2>
-          No courses are selected. To view a course plan, 
-          please select courses by clicking on a course.
+          No courses are currently selected. To view a course plan, 
+          please select course cards. 
         </h2>
       : selected.map(course => (
           <div>
