@@ -8,7 +8,9 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "file": "c:\\Users\\HP\\Quick-React\\dist\\index.html"
+            "outputCapture": "console",
+            "url": "http://localhost:5173/",
+            //"file": "c:\\Users\\HP\\Quick-React\\dist\\index.html"
         }
     ]
 }

@@ -4,6 +4,7 @@ import TermSelector from './TermSelector';
 import Terms from './TermConstants';
 import Modal from './Modal';
 import CoursePlan from './CoursePlan';
+import getUnselectableCourses from '../utilities/timeConflicts';
 
 const CoursePage = ({courses}) => {
     // Term Selection
@@ -11,11 +12,30 @@ const CoursePage = ({courses}) => {
     
     // Course Selection
     const [selectedCourses, setSelectedCourses] = useState([]);
-    const toggleSelected = (item) => setSelectedCourses(
-        selectedCourses.includes(item)
+    const [unselectableCourses, setUnselectableCourses] = useState([]);
+
+    const toggleSelected = (item) => 
+    {
+      if (!unselectableCourses.includes(item))
+      {
+        setSelectedCourses(
+          selectedCourses.includes(item)
+          ? selectedCourses.filter(x => x !== item)
+          : [...selectedCourses, item]
+        );
+
+        const selectedCoursesWithNewCourse = selectedCourses.includes(item)
         ? selectedCourses.filter(x => x !== item)
-        : [...selectedCourses, item]
-      );
+        : [...selectedCourses, item];
+
+        setUnselectableCourses(
+          getUnselectableCourses(selectedCoursesWithNewCourse, courses)
+        );
+
+        console.log(selectedCourses);
+        console.log(unselectableCourses);
+      };
+    };
 
     // Pop Up
     const [open, setOpen] = useState(false);
@@ -36,6 +56,7 @@ const CoursePage = ({courses}) => {
         <CourseList selection={buttonSelection} 
                     courses={courses} 
                     selectedCourses={selectedCourses}
+                    unselectableCourses={unselectableCourses}
                     toggleSelected={toggleSelected}/>
       </div>
     );

@@ -9,3 +9,7 @@
 .notselected {
     background-color:white;
 }
+
+.unselectable {
+    background-color:lightgray;
+}
