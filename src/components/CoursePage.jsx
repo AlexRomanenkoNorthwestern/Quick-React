@@ -5,8 +5,27 @@ import Terms from './TermConstants';
 import Modal from './Modal';
 import CoursePlan from './CoursePlan';
 import getUnselectableCourses from '../utilities/timeConflicts';
+import { signInWithGoogle, signOut, useAuthState } from '../utilities/firebase';
 
-const CoursePage = ({courses}) => {
+const SignInButton = () => (
+  <button className="ms-auto btn btn-dark" onClick={signInWithGoogle}>Sign in</button>
+);
+
+const SignOutButton = () => (
+  <button className="ms-auto btn btn-dark" onClick={signOut}>Sign out</button>
+);
+
+const AuthButton = () => {
+  const [user] = useAuthState();
+  return user ? <SignOutButton /> : <SignInButton />;
+};
+
+export const activation = () => {
+  const [user] = useAuthState();
+  return user !== Null ? 'active' : 'inactive';
+}
+
+export const CoursePage = ({courses}) => {
     // Term Selection
     const [buttonSelection, setSelection] = useState(() => Terms[0]);
     
@@ -43,9 +62,10 @@ const CoursePage = ({courses}) => {
       <div>
         <nav className="d-flex">
           <TermSelector selection={buttonSelection} setSelection={setSelection} />
-          <button className="btn btn-outline-dark" style={{position:'absolute', right:'12.8%'}}
+          <button className="btn btn-outline-dark" style={{marginLeft:'15px'}}
             onClick={openModal}><i className="bi bi-calendar-check"></i> Course Plan
           </button>
+          <AuthButton />
         </nav>
         <Modal open={open} close={closeModal}>
           <CoursePlan selected={selectedCourses} />
@@ -59,4 +79,3 @@ const CoursePage = ({courses}) => {
     );
   };  
 
-  export default CoursePage;

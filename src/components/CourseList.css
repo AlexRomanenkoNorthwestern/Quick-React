@@ -18,3 +18,7 @@
     background: 'white';
     border: 'white'
 }
+
+.hide {
+    visibility: 'hidden';
+}

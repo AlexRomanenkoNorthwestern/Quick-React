@@ -1,5 +1,5 @@
-import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
-import CoursePage from './CoursePage';
+import {BrowserRouter, Routes, Route, useParams } from "react-router-dom";
+import {CoursePage} from './CoursePage';
 import CourseEditor from "../CourseEditor";
 
 const CourseFormForUrl = ({courses}) => {
@@ -23,5 +23,5 @@ const Dispatcher = ({courses}) => {
   </BrowserRouter>
   );
 };
-
+  
 export default Dispatcher;

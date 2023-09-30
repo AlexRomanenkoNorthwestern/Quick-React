@@ -1,15 +1,20 @@
 import './CourseList.css';
 import { Link } from 'react-router-dom';
+import {useAuthState } from '../utilities/firebase';
 
-const Course = ({courseId, course, selectedCourses, unselectableCourses, toggleSelected}) => (
+const Course = ({courseId, course, selectedCourses, unselectableCourses, toggleSelected}) => 
+{
+    const [user] = useAuthState();
+    const url = user !== null ?  '/' + courseId + '/edit' : '';
+    return(
     <div className ="card m-1 p-2" onClick={() => toggleSelected(course)}>
       <div className={`card-body ${selectedCourses.includes(course) ? 'selected' : 'notselected'}
       ${unselectableCourses.includes(course) ? 'unselectable' : ''}`}>
       <div>
         <h4>{course.term}{' CS '}{course.number}
-          <Link to={`/${courseId}/edit`}>
+          <Link to={url} className = {activation} >
             <button style ={{background:'transparent', border:'transparent'}} >
-              <i className={'bi-pencil-square'} style = {{color: 'grey', marginleft: '10px'}}/>
+              <i className={`${ user !== null ? 'bi-pencil-square' : ''}`} style = {{color: 'grey', marginleft: '10px'}}/>
             </button>
           </Link>
         </h4>
@@ -28,7 +33,9 @@ const Course = ({courseId, course, selectedCourses, unselectableCourses, toggleS
         </button>
       </div>
     </div>
-);
+    );
+  };
+
 
 const CourseList = ({courses, selection, selectedCourses, unselectableCourses, toggleSelected}) => {
   return( 
