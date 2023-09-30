@@ -4,7 +4,7 @@ import CourseEditor from "../CourseEditor";
 
 const CourseFormForUrl = ({courses}) => {
     const { id } = useParams();
-    return <div className = "container"><CourseEditor course={courses[id]} /></div>;
+    return <div className = "container"><CourseEditor id={id} course={courses[id]} /></div>;
   };
 
 const Dispatcher = ({courses}) => {
