@@ -12,7 +12,7 @@ const Course = ({courseId, course, selectedCourses, unselectableCourses, toggleS
       ${unselectableCourses.includes(course) ? 'unselectable' : ''}`}>
       <div>
         <h4>{course.term}{' CS '}{course.number}
-          <Link to={url} className = {activation} >
+          <Link to={url} >
             <button style ={{background:'transparent', border:'transparent'}} >
               <i className={`${ user !== null ? 'bi-pencil-square' : ''}`} style = {{color: 'grey', marginleft: '10px'}}/>
             </button>

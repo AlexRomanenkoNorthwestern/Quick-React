@@ -20,10 +20,7 @@ const AuthButton = () => {
   return user ? <SignOutButton /> : <SignInButton />;
 };
 
-export const activation = () => {
-  const [user] = useAuthState();
-  return user !== Null ? 'active' : 'inactive';
-}
+const activation = () => ({isActive}) => isActive ? 'active' : 'inactive';
 
 export const CoursePage = ({courses}) => {
     // Term Selection
