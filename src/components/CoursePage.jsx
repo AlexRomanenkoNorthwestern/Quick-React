@@ -20,8 +20,6 @@ const AuthButton = () => {
   return user ? <SignOutButton /> : <SignInButton />;
 };
 
-const activation = () => ({isActive}) => isActive ? 'active' : 'inactive';
-
 export const CoursePage = ({courses}) => {
     // Term Selection
     const [buttonSelection, setSelection] = useState(() => Terms[0]);

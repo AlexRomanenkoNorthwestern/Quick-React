@@ -1,22 +1,30 @@
 import './CourseList.css';
 import { Link } from 'react-router-dom';
-import {useAuthState } from '../utilities/firebase';
+import { useProfile } from '../utilities/profile';
 
 const Course = ({courseId, course, selectedCourses, unselectableCourses, toggleSelected}) => 
 {
-    const [user] = useAuthState();
-    const url = user !== null ?  '/' + courseId + '/edit' : '';
+    const [profile, profileLoading, profileError] = useProfile();
+
+    if (profileError) return <h1>Error loading profile: {`${profileError}`}</h1>;
+    if (profileLoading) return <h1>Loading user profile</h1>;
+    if (!profile) return <h1>No profile data</h1>;
+
+    const url = '/' + courseId + '/edit';
     return(
     <div className ="card m-1 p-2" onClick={() => toggleSelected(course)}>
       <div className={`card-body ${selectedCourses.includes(course) ? 'selected' : 'notselected'}
       ${unselectableCourses.includes(course) ? 'unselectable' : ''}`}>
       <div>
         <h4>{course.term}{' CS '}{course.number}
+        {
+           profile?.isAdmin &&
           <Link to={url} >
             <button style ={{background:'transparent', border:'transparent'}} >
-              <i className={`${ user !== null ? 'bi-pencil-square' : ''}`} style = {{color: 'grey', marginleft: '10px'}}/>
+              <i className={'bi-pencil-square'} style = {{color: 'grey', marginleft: '10px'}}/>
             </button>
           </Link>
+        }
         </h4>
       </div>
         {course.title}

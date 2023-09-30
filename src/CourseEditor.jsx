@@ -35,6 +35,7 @@ const ButtonBar = ({message, disabled}) => {
 const CourseEditor = ({id, course}) => {
   const [update, result] = useDbUpdate(`/courses/${id}`);
   const [state, change] = useFormData(validateCourseData, course);
+  console.log(state);
   const submit = (evt) => {
     evt.preventDefault();
     if (!state.errors && state.values !== course) {
