@@ -31,9 +31,6 @@ const CoursePage = ({courses}) => {
         setUnselectableCourses(
           getUnselectableCourses(selectedCoursesWithNewCourse, courses)
         );
-
-        console.log(selectedCourses);
-        console.log(unselectableCourses);
       };
     };
 

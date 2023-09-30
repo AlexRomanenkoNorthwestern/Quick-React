@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { useJsonQuery } from './utilities/fetch';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import CoursePage from './components/CoursePage';
+import Dispatcher from './components/Dispatcher';
 
 const Main = () => {
   const [data, isLoading, error] = useJsonQuery("https://courses.cs.northwestern.edu/394/guides/data/cs-courses.php");
@@ -17,9 +17,7 @@ const Main = () => {
       <div className = "container-fluid" style={{background:"linear-gradient(#dce8f6, #dce8f6)" }}>
         <Banner title = {data.title}/>
       </div>
-      <div className = "container">
-        <CoursePage courses = {data.courses}/>
-      </div>
+      <Dispatcher courses = {data.courses}/>
     </div>
   );
 }

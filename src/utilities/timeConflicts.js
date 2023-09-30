@@ -39,16 +39,16 @@ const getConflictingCourses = (selectedCourse, courses) =>
         (course) => hasCommonTerm(selectedCourse, course));
 
     if (coursesCommonTerm.length == 0) return [];
-    console.log(coursesCommonTerm);
+
     // Of these courses, get all that have a shared day with the selected course
     const coursesCommonDay = coursesCommonTerm.filter(
         (course) => hasCommonDay(selectedCourse, course));
     if (coursesCommonDay.length == 0) return [];
-    console.log(coursesCommonDay);
+
     // Of these courses, get all that have an overlapping time with the selected course
     const coursesCommonTime = coursesCommonDay.filter(
         (course) => hasCommonTime(selectedCourse, course));
-    console.log(coursesCommonTime);
+  
     return coursesCommonTime;
 };
 

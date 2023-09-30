@@ -13,3 +13,8 @@
 .unselectable {
     background-color:lightgray;
 }
+
+.invisible {
+    background: 'white';
+    border: 'white'
+}
