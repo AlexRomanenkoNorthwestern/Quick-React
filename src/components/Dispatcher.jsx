@@ -7,7 +7,8 @@ const CourseFormForUrl = ({courses}) => {
     return <div className = "container"><CourseEditor course={courses[id]} /></div>;
   };
 
-const Dispatcher = ({courses}) => (
+const Dispatcher = ({courses}) => {
+  return(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={
@@ -20,6 +21,7 @@ const Dispatcher = ({courses}) => (
       />
     </Routes>
   </BrowserRouter>
-);
+  );
+};
 
 export default Dispatcher;
