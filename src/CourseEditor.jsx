@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 
 const validateCourseData = (key, val) => {
   switch (key) {
-    case 'firstName': case 'lastName':
+    case 'title': 
       return /(^\w\w)/.test(val) ? '' : 'must be least two characters';
-    case 'email':
-      return /^\w+@\w+[.]\w+/.test(val) ? '' : 'must contain name@domain.top-level-domain';
+    case 'meets':
+      return /((M|Tu|W|Th|F){1,5}\s\d\d[:]\d\d[-]\d\d[:]\d\d)|^$/.test(val) ? '' : 'must contain days and start-end times, e.g., MWF 12:00-13:20';
     default: return '';
   }
 };
@@ -32,7 +32,7 @@ const ButtonBar = ({message, disabled}) => {
 };
 //      <button type="submit" className="btn btn-primary me-auto" disabled={disabled}>Submit</button>
 
-const CourseEditor = ({id, course}) => {
+const CourseEditor = ({course}) => {
   //const [update, result] = useDbUpdate(`/users/${user.id}`);
   const [state, change] = useFormData(validateCourseData, course);
   const submit = (evt) => {
