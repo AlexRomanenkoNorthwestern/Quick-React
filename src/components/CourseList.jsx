@@ -12,7 +12,7 @@ const Course = ({courseId, course, selectedCourses, unselectableCourses, toggleS
 
     const url = '/' + courseId + '/edit';
     return(
-    <div className ="card m-1 p-2" onClick={() => toggleSelected(course)}>
+    <div className ="card m-1 p-2" data-cy="course" onClick={() => toggleSelected(course)}>
       <div className={`card-body ${selectedCourses.includes(course) ? 'selected' : 'notselected'}
       ${unselectableCourses.includes(course) ? 'unselectable' : ''}`}>
       <div>
