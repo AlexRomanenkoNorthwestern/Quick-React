@@ -11,7 +11,8 @@
     "cy:open": "cypress open",
     "em:start": "firebase emulators:start --import=./saved-data --export-on-exit",
     "em:exec": "firebase emulators:exec --import=./saved-data 'npm start'",
-    "em:execui": "firebase emulators:exec --ui --import=./saved-data 'npm start'"
+    "em:execui": "firebase emulators:exec --ui --import=./saved-data 'npm start'",
+    "em:cy:open": "start-server-and-test em:exec http://127.0.0.1:3000 cy:open"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.35.3",
@@ -30,6 +31,7 @@
     "c8": "^8.0.1",
     "cypress": "^13.3.2",
     "jsdom": "^22.1.0",
+    "start-server-and-test": "^2.0.1",
     "vite": "^4.4.9",
     "vitest": "^0.34.3"
   }

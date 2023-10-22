@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { useCallback, useEffect, useState } from 'react';
 import { getDatabase, onValue, ref, update, connectDatabaseEmulator } from 'firebase/database';
-import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, connectAuthEmulator } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, connectAuthEmulator, signInWithCredential } from 'firebase/auth';
 
 const firebaseConfig = {
     apiKey: "AIzaSyCnOP_A9s4TZMkObhBwI8KRdNONT8-2xzM",
@@ -18,6 +18,19 @@ const firebaseConfig = {
 const firebase = initializeApp(firebaseConfig);
 
 const database = getDatabase(firebase);
+
+const auth = getAuth(firebase);
+
+if (import.meta.env.NODE_ENV !== 'production'){
+    connectAuthEmulator(auth, "http://127.0.0.1:9099");
+    connectDatabaseEmulator(database, "127.0.0.1", 9000);
+  
+    //console.log("connected")
+    signInWithCredential(auth, GoogleAuthProvider.credential(
+      '{"sub": "2Bqd9Ejz9W7gihKsDlb0oup2c1F1", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
+    ));
+}
+
 
 export const useDbData = (path) => {
   const [data, setData] = useState();
@@ -52,10 +65,10 @@ export const useDbUpdate = (path) => {
 };
 
 export const signInWithGoogle = () => {
-    signInWithPopup(getAuth(firebase), new GoogleAuthProvider());
+    signInWithPopup(auth, new GoogleAuthProvider());
   };
   
-  const firebaseSignOut = () => signOut(getAuth(firebase));
+  const firebaseSignOut = () => signOut(auth);
   
   export { firebaseSignOut as signOut };
   
@@ -63,18 +76,10 @@ export const signInWithGoogle = () => {
     const [user, setUser] = useState();
     
     useEffect(() => (
-      onAuthStateChanged(getAuth(firebase), setUser)
+      onAuthStateChanged(auth, setUser)
     ), []);
   
     console.log(user);
     return [user];
   };
 
-if (process.env.REACT_APP_EMULATE) {
-    connectAuthEmulator(auth, "http://127.0.0.1:9099");
-    connectDatabaseEmulator(db, "127.0.0.1", 9000);
-  
-    signInWithCredential(auth, GoogleAuthProvider.credential(
-      '{"sub": "qEvli4msW0eDz5mSVO6j3W7i8w1k", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
-    ));
-}
