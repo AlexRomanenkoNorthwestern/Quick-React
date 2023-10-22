@@ -21,7 +21,9 @@ const database = getDatabase(firebase);
 
 const auth = getAuth(firebase);
 
-if (import.meta.env.NODE_ENV !== 'production'){
+
+const url =  window.location.href
+  if(!url.includes("quick-react-b6de6.web.app/")) {
     connectAuthEmulator(auth, "http://127.0.0.1:9099");
     connectDatabaseEmulator(database, "127.0.0.1", 9000);
   
@@ -30,7 +32,6 @@ if (import.meta.env.NODE_ENV !== 'production'){
       '{"sub": "2Bqd9Ejz9W7gihKsDlb0oup2c1F1", "email": "tester@gmail.com", "displayName":"Test User", "email_verified": true}'
     ));
 }
-
 
 export const useDbData = (path) => {
   const [data, setData] = useState();
